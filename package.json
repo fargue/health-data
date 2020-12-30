@@ -1,22 +1,20 @@
 {
   "name": "health-data",
-  "version": "1.0.0",
-  "description": "Pull data from google health to store in db",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fargue/health-data.git"
-  },
-  "author": "Jerry Arnold",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/fargue/health-data/issues"
-  },
-  "homepage": "https://github.com/fargue/health-data#readme",
   "dependencies": {
-    "koa": "^2.13.0"
+    "cookie-parser": "^1.4.5",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "google-auth-library": "^6.1.3",
+    "googleapis": "^66.0.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "~1.9.1",
+    "node-rest-client": "^3.1.0",
+    "pug": "2.0.0-beta11"
   }
 }
