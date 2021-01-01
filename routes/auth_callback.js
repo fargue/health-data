@@ -30,7 +30,7 @@ router.get('/', function (req, res, next) {
             var webToken = jwt.sign(token, CONFIG.JWTsecret);
             console.log("google token is >" + webToken + "<");
             res.cookie('jwt', webToken);
-            return res.redirect('/get_some_data');
+            return res.redirect('/handle_login');
         });
     }
 });

@@ -10,7 +10,7 @@ const CONFIG = require('./config');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth_callback');
-var getDataRouter = require('./routes/get_some_data');
+var handleLoginRouter = require('./routes/handle_login');
 
 
 var app = express();
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth_callback', authRouter);
-app.use('/get_some_data', getDataRouter);
+app.use('/handle_login', handleLoginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

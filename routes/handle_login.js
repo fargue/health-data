@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const CONFIG = require('../config');
 
 function sessionData(ses,webToken) {
-    console.log("getting session data");    
+    console.log("handling user granting access");    
     console.log('Start Time: %s, End Time: %s',
         ses.startTimeMillis,
         ses.endTimeMillis
@@ -65,6 +65,7 @@ function sessionData(ses,webToken) {
 router.get('/', function (req, res, next) {
     if (!req.cookies.jwt) {
         // We haven't logged in
+        console.error('Not logged in, redirecting to root');
         return res.redirect('/');
     }
     // Create an OAuth2 client object from the credentials in our config file
@@ -76,43 +77,14 @@ router.get('/', function (req, res, next) {
     oauth2Client.credentials = jwt.verify(req.cookies.jwt, CONFIG.JWTsecret);
     console.log('credentials token is >%j', oauth2Client.credentials);
     webToken = oauth2Client.credentials.access_token;
+    refreshToken = oauth2Client.credentials.refresh_token;
 
-    var client = new Client();
-    // activityType 72 is SLEEP
-    var url = "https://www.googleapis.com/fitness/v1/users/me/sessions?activityType=72";
-    var args = {
-        headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer " + webToken
-        } // request headers
-    };
-    client.get(url, args,
-        function (data, response) {
-            // parsed response body as js object
-            console.log("Data is:");
-            console.log(data);
-            var sleepSessions = data.session;
-            console.log('Iterating sessions');
-            sleepSessions.forEach(session => {
-                //console.log(session);
-                sessionData(session,webToken);
-            });
-            // raw response
-            //console.log("Response is:");
-            //console.log(response);
-        }).on('error', function (err) {
-            console.log('something went wrong on the request', err.request.options);
-        });
-
-    // handling client error events
-    client.on('error', function (err) {
-        console.error('Something went wrong on the client', err);
-    });
-
-
-    res.send('respond with a resource');
+    res.render('login_data', { 
+        title: 'Save Credentials',
+        webToken: webToken, 
+        refreshToken: refreshToken
+        }
+    );
 });
-
-
 
 module.exports = router;
