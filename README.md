@@ -16,3 +16,13 @@ DEBUG=health-data:* npm start
 
 * [Express Getting Started](https://expressjs.com/en/starter/installing.html)
 * [Google Oauth](https://dev.to/aidanlovelace/how-to-setup-google-oauth2-login-with-express-2d30)
+
+
+## To Use:
+
+```
+npm start
+open http://localhost:3002/handle_login
+```
+
+copy refresh Token value and use
